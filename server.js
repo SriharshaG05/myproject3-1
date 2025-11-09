@@ -50,19 +50,19 @@ app.use(session(sessionConfig));
 
 // MongoDB connection with optimized settings for high concurrency
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/food_management', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   maxPoolSize: 50, // Increase connection pool size for 250 concurrent users
   minPoolSize: 10,
-  socketTimeoutMS: 45000,
-  serverSelectionTimeoutMS: 5000,
-  family: 4 // Use IPv4
+  serverSelectionTimeoutMS: 10000, // Increased to 10 seconds for Atlas
+  socketTimeoutMS: 45000
 })
 .then(() => {
   console.log('✅ MongoDB connected successfully');
   console.log('📊 Server configured for up to 250 concurrent users');
 })
-.catch(err => console.error('❌ MongoDB connection error:', err));
+.catch(err => {
+  console.error('❌ MongoDB connection error:', err.message);
+  console.error('Full error:', err);
+});
 
 // Routes
 app.use('/auth', authRoutes);
