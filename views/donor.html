@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donor Dashboard - FoodShare</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/home-style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: var(--light-beige);
+    }
+    .dashboard-hero {
+      background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+      color: white;
+      padding: 40px 0;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .dashboard-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .dashboard-quote {
+      font-size: 1.2rem;
+      font-style: italic;
+      opacity: 0.95;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">�</span>
+        <span class="logo-text">FoodShare</span>
+      </div>
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <span id="userName" class="nav-link" style="color: var(--primary-green); font-weight: 600;"></span>
+        <button onclick="logout()" class="btn btn-secondary" style="padding: 8px 20px;">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Dashboard Hero -->
+  <div class="dashboard-hero">
+    <div class="container">
+      <h1>Donor Dashboard</h1>
+      <p class="dashboard-quote">"Your leftovers could be someone's fresh start."</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="dashboard">
+      <div class="stats-container">
+        <div class="stat-card">
+          <h3>Total Posts</h3>
+          <p class="stat-value" id="totalPosts">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Delivered</h3>
+          <p class="stat-value" id="deliveredCount">0</p>
+        </div>
+        <div class="stat-card highlight">
+          <h3>🏆 Reward Points</h3>
+          <p class="stat-value" id="points">0</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>📝 Post New Food</h2>
+        <div id="message" class="message"></div>
+        <form id="postFoodForm" class="post-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="food_name">Food Name</label>
+              <input type="text" id="food_name" name="food_name" placeholder="e.g., Dal Rice" required>
+            </div>
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="text" id="quantity" name="quantity" placeholder="e.g., 5 plates" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prepared_time">Prepared Time</label>
+              <input type="datetime-local" id="prepared_time" name="prepared_time" required>
+            </div>
+            <div class="form-group">
+              <label for="available_until">Available Until</label>
+              <input type="datetime-local" id="available_until" name="available_until" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="e.g., Hyderabad" required>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Post Food</button>
+        </form>
+      </div>
+
+      <div class="section">
+        <h2>🍽️ My Food Posts</h2>
+        <div id="myPosts" class="cards-grid"></div>
+      </div>
+
+      <div class="section">
+        <h2>📬 Requests</h2>
+        <div id="requests" class="requests-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" style="margin-top: 60px;">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 FoodShare. Because compassion isn't a service — it's a habit.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/donor.js"></script>
+</body>
+</html>

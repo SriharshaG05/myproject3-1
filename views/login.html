@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - FoodShare</title>
+  <link rel="stylesheet" href="/css/home-style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body">
+  <div class="role-selector">
+    <button type="button" class="role-btn active" id="userBtn" onclick="selectRole('user')">👤 USER</button>
+    <button type="button" class="role-btn" id="adminBtn" onclick="selectRole('admin')">🔐 ADMIN</button>
+  </div>
+  
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <span class="logo-icon">🍲</span>
+        <span class="logo-text">FoodShare</span>
+      </div>
+      
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="auth-subtitle">Login to continue your journey of sharing and caring</p>
+      
+      <div id="message" class="message"></div>
+      
+      <form id="loginForm" class="contact-form">
+        <input type="hidden" id="roleInput" name="role" value="user">
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-full">Login</button>
+      </form>
+      
+      <div class="auth-quote">
+        "Kindness begins with one login."
+      </div>
+      
+      <div class="auth-links">
+        Don't have an account? <a href="/signup">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function selectRole(role) {
+      const userBtn = document.getElementById('userBtn');
+      const adminBtn = document.getElementById('adminBtn');
+      const roleInput = document.getElementById('roleInput');
+      
+      roleInput.value = role;
+      
+      if (role === 'user') {
+        userBtn.classList.add('active');
+        adminBtn.classList.remove('admin-active');
+      } else {
+        userBtn.classList.remove('active');
+        adminBtn.classList.add('admin-active');
+      }
+    }
+  </script>
+  <script src="/js/login.js"></script>
+</body>
+</html>

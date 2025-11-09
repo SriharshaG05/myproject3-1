@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - FoodShare</title>
+  <link rel="stylesheet" href="/css/home-style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <span class="logo-icon">🍲</span>
+        <span class="logo-text">FoodShare</span>
+      </div>
+      
+      <h2 class="auth-title">Join Our Community</h2>
+      <p class="auth-subtitle">Start making a difference today</p>
+      
+      <div id="message" class="message"></div>
+      
+      <form id="signupForm" class="contact-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required placeholder="John Doe">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required minlength="6" placeholder="At least 6 characters">
+        </div>
+        
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" placeholder="e.g., Hyderabad" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="role">I want to</label>
+          <select id="role" name="role" required>
+            <option value="">Select your role</option>
+            <option value="donor">🍽️ Donate Food (Share surplus)</option>
+            <option value="receiver">🤲 Receive Food (Find meals)</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+      </form>
+      
+      <div class="auth-quote">
+        "Together, we can make hunger rare."
+      </div>
+      
+      <div class="auth-links">
+        Already have an account? <a href="/login">Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/signup.js"></script>
+</body>
+</html>

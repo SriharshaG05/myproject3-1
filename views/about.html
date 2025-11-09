@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - FoodShare</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<![CDATA[<body>]]>
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">🍲</span>
+        <span class="logo-text">FoodShare</span>
+      </div>
+      
+      <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Hero -->
+  <section class="about-hero">
+    <div class="container">
+      <h1 class="page-title">About FoodShare</h1>
+      <p class="page-subtitle">"We bridge abundance and need — connecting those with extra food to those who need it."</p>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission-section">
+    <div class="container">
+      <div class="two-column-layout">
+        <div class="column-image">
+          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=500&fit=crop" alt="People sharing food">
+        </div>
+        <div class="column-text">
+          <h2 class="section-title">Our Mission</h2>
+          <p>
+            FoodShare connects surplus food with people who need it. We make redistribution simple, dignified, and efficient for communities, restaurants, and families alike.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values-section">
+    <div class="container">
+      <h2 class="section-title center">Our Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h3>Dignity & Respect</h3>
+          <p>Every interaction on our platform honors the humanity of all participants. No judgment, just compassion.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🌍</div>
+          <h3>Sustainability</h3>
+          <p>Reducing food waste is crucial for our planet. Every meal saved is a step toward a healthier Earth.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💚</div>
+          <h3>Community</h3>
+          <p>We believe in the power of local connections and neighbors helping neighbors.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">⚡</div>
+          <h3>Simplicity</h3>
+          <p>Making food sharing easy and accessible for everyone, regardless of technical expertise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <span class="logo-icon">🍲</span>
+            <span class="logo-text">FoodShare</span>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Register</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: hello@foodshare.org</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 FoodShare. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      const navMenu = document.querySelector('.nav-menu');
+      navMenu.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+- [x] Change body background color to white in public/css/style.css
+- [x] Remove the Contact Section from views/about.html
