@@ -1060,11 +1060,23 @@ body.auth-body::before {
 
 .role-selector {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: -60px;
+  right: 0;
   display: flex;
   gap: 10px;
   z-index: 10;
+}
+
+/* For mobile, role-selector will be repositioned via media queries */
+@media (max-width: 768px) {
+  .role-selector {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
 }
 
 .role-btn {

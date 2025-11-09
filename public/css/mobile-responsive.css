@@ -11,6 +11,15 @@
     width: 100%;
   }
 
+  /* Fix auth body layout */
+  body.auth-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
   /* Better touch targets (min 44x44px) */
   .btn,
   .nav-link,
@@ -72,34 +81,75 @@
   }
 
   /* Auth pages mobile */
+  body.auth-body {
+    padding: 15px;
+    background-attachment: scroll !important; /* Fix for mobile */
+  }
+
+  .auth-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
   .auth-card {
     margin: 20px auto !important;
-    padding: 25px 20px !important;
-    max-width: 95% !important;
-    border-radius: 12px;
+    padding: 30px 20px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .auth-logo {
+    margin-bottom: 20px !important;
+  }
+
+  .auth-logo .logo-icon {
+    font-size: 2.5rem !important;
+  }
+
+  .auth-logo .logo-text {
+    font-size: 1.8rem !important;
   }
 
   .auth-title {
-    font-size: 1.5rem !important;
+    font-size: 1.6rem !important;
+    margin-bottom: 8px !important;
   }
 
   .auth-subtitle {
-    font-size: 0.9rem !important;
+    font-size: 0.92rem !important;
+    line-height: 1.4;
+    margin-bottom: 25px !important;
   }
 
   .role-selector {
     position: static !important;
     width: 100%;
     justify-content: center;
-    margin-bottom: 20px;
-    gap: 10px;
+    margin-bottom: 25px;
+    gap: 8px;
   }
 
   .role-btn {
     flex: 1;
-    min-width: 120px;
+    max-width: 150px;
     font-size: 0.9rem;
-    padding: 10px 16px;
+    padding: 12px 20px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .auth-quote {
+    font-size: 0.88rem !important;
+    padding: 12px !important;
+    margin-top: 20px !important;
+  }
+
+  .auth-links {
+    font-size: 0.9rem;
+    margin-top: 20px !important;
   }
 
   /* Form improvements */
@@ -332,13 +382,40 @@
     font-size: 0.9rem !important;
   }
 
+  /* Auth pages for very small screens */
+  body.auth-body {
+    padding: 10px;
+  }
+
   .auth-card {
-    padding: 20px 15px !important;
+    padding: 25px 18px !important;
+    margin: 10px auto !important;
+  }
+
+  .auth-logo .logo-icon {
+    font-size: 2.2rem !important;
+  }
+
+  .auth-logo .logo-text {
+    font-size: 1.5rem !important;
+  }
+
+  .auth-title {
+    font-size: 1.4rem !important;
+  }
+
+  .auth-subtitle {
+    font-size: 0.85rem !important;
   }
 
   .role-btn {
     font-size: 0.85rem;
-    padding: 8px 12px;
+    padding: 10px 16px;
+  }
+
+  .auth-quote {
+    font-size: 0.82rem !important;
+    padding: 10px !important;
   }
 
   table {
@@ -370,10 +447,47 @@
     min-height: 300px !important;
   }
 
+  body.auth-body {
+    padding: 10px;
+    align-items: flex-start;
+  }
+
   .auth-card {
-    margin: 15px auto !important;
-    max-height: 85vh;
+    margin: 10px auto !important;
+    max-height: 90vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .auth-logo {
+    margin-bottom: 15px !important;
+  }
+
+  .auth-logo .logo-icon {
+    font-size: 2rem !important;
+  }
+
+  .auth-logo .logo-text {
+    font-size: 1.4rem !important;
+  }
+
+  .auth-title {
+    font-size: 1.3rem !important;
+  }
+
+  .auth-subtitle {
+    font-size: 0.8rem !important;
+    margin-bottom: 15px !important;
+  }
+
+  .auth-quote {
+    margin-top: 10px !important;
+    padding: 8px !important;
+    font-size: 0.75rem !important;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
   }
 }
 
@@ -421,5 +535,51 @@ html {
   select,
   textarea {
     font-size: 16px !important;
+  }
+}
+
+/* Very small screens (max 360px width) */
+@media (max-width: 360px) {
+  .auth-card {
+    padding: 20px 15px !important;
+  }
+
+  .role-btn {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    min-width: 90px;
+  }
+
+  .auth-title {
+    font-size: 1.3rem !important;
+  }
+
+  .btn {
+    font-size: 0.85rem !important;
+  }
+}
+
+/* Short screens in portrait */
+@media (max-height: 700px) and (max-width: 768px) and (orientation: portrait) {
+  body.auth-body {
+    padding: 10px;
+    justify-content: flex-start;
+    padding-top: 20px;
+  }
+
+  .auth-card {
+    margin: 10px auto !important;
+  }
+
+  .auth-logo {
+    margin-bottom: 15px !important;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .auth-quote {
+    margin-top: 15px !important;
   }
 }
