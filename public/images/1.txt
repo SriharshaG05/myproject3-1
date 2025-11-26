@@ -1,0 +1,15 @@
+docker pull jasonrivers/nagios
+
+docker run --name nagios \
+  -d -p 8080:80 \
+  jasonrivers/nagios
+
+# Open in browser:
+# http://localhost:8080
+# Login: nagiosadmin / nagios
+
+# (Optional) Check running container
+docker ps
+
+# (Optional) Stop container
+docker stop nagios
