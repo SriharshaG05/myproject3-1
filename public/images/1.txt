@@ -13,3 +13,190 @@ docker ps
 
 # (Optional) Stop container
 docker stop nagios
+
+
+pipeline {
+    agent any
+
+    tools {
+        maven "maven"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+    }
+
+    post {
+        // Always publish test results & jar, even if build is UNSTABLE
+        always {
+            junit '**/target/surefire-reports/TEST-*.xml'
+            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+        }
+    }
+}
+
+/*
+
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven'
+        jdk 'JDK17'
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/SriharshaG05/java-webapp.git'
+            }
+        }
+
+        stage('Build WAR') {
+            steps {
+                bat 'mvn -Dmaven.test.failure.ignore=true clean package'
+            }
+        }
+
+        stage('List Output (Debug)') {
+            steps {
+                bat 'dir target'
+            }
+        }
+
+        stage('Archive WAR') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+            }
+        }
+
+        stage('Deploy to Tomcat') {
+            steps {
+                deploy adapters: [tomcat8(
+                    credentialsId: 'tomcatCreds',
+                    path: '/',
+                    url: 'http://localhost:8080'
+                )], 
+                contextPath: 'java-webapp',
+                war: 'target/java-webapp-1.0-SNAPSHOT.war'
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                if (fileExists('target/surefire-reports')) {
+                    junit 'target/surefire-reports/*.xml'
+                } else {
+                    echo 'No test results found — skipping JUnit.'
+                }
+            }
+        }
+        
+        success {
+            echo "🎉 Build + Deploy SUCCESS!"
+        }
+        
+        failure {
+            echo "❌ Something failed!"
+        }
+    }
+}
+*/
+
+/*
+pipeline {
+    agent any
+
+    tools {
+        maven 'maven'   // Name in Jenkins Global Tool Configuration
+        jdk 'jdk'     // Name in Jenkins Global Tool Configuration
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/SriharshaG05/java-webapp.git'
+            }
+        }
+
+        stage('Build WAR') {
+            steps {
+                bat 'mvn -Dmaven.test.failure.ignore=true clean package'
+            }
+        }
+
+        stage('List Output (Debug)') {
+            steps {
+                bat 'dir target'
+            }
+        }
+
+        stage('Archive WAR') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                if (fileExists('target/surefire-reports')) {
+                    junit 'target/surefire-reports/*.xml'
+                } else {
+                    echo 'No test results found — skipping JUnit step.'
+                }
+            }
+        }
+        
+        success {
+            echo "🎉 Build successful! WAR file created and archived."
+        }
+        
+        failure {
+            echo "❌ Build failed — check logs."
+        }
+    }
+}
+*/
+# Start Minikube using Docker Desktop
+minikube start --driver=docker
+
+# Check Minikube status
+minikube status
+
+# Create Nginx deployment
+kubectl create deployment my-nginx --image=nginx
+
+# Check pods
+kubectl get pods
+
+# Expose deployment as NodePort
+kubectl expose deployment my-nginx --type=NodePort --port=80 --name=nginx-service
+
+# Change NodePort to 8090
+kubectl patch service nginx-service -p '{"spec": {"ports": [{"port":80, "nodePort":8090}]}}'
+
+# Check services
+kubectl get svc
+
+# Get service URL
+minikube service nginx-service --url
+
+# (Open in browser: http://localhost:8090)
+
+# List pods and services
+kubectl get pods
+kubectl get svc
+
+# Stop Minikube (optional)
+minikube stop
