@@ -107,4 +107,366 @@ pipeline {
 
 
 
+========================================================
+                WEEK – 5 : DOCKER LAB
+========================================================
+
+OBJECTIVE:
+To understand Docker images, containers, Dockerfile, volume, logs, 
+and run Java + Static website applications using Docker.
+
+========================================================
+1️⃣ STATIC WEBSITE USING DOCKER + NGINX
+========================================================
+
+Folder Structure:
+week5/
+ ├── index.html
+ └── Dockerfile
+
+index.html
+-----------
+<h1>Hello from Docker Container!</h1>
+
+Dockerfile (Static Website)
+----------------------------
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+
+Commands:
+----------
+docker build -t mynginx:1.0 .
+docker run -d -p 8080:80 --name myweb mynginx:1.0
+docker ps
+docker stop myweb
+docker rm myweb
+
+Output:
+--------
+Open browser → http://localhost:8080
+
+========================================================
+2️⃣ JAVA APPLICATION IN DOCKER
+========================================================
+
+Folder:
+week5-java/
+ ├── Main.java
+ └── Dockerfile
+
+Main.java
+-----------
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello from Java Docker!");
+    }
+}
+
+Compile:
+javac Main.java
+
+Dockerfile (Java App)
+----------------------
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY Main.class .
+CMD ["java", "Main"]
+
+Commands:
+----------
+docker build -t javaapp:1.0 .
+docker run --name myjava javaapp:1.0
+
+========================================================
+3️⃣ IMPORTANT DOCKER COMMANDS
+========================================================
+docker images
+docker ps
+docker ps -a
+docker logs <name>
+docker exec -it <name> sh
+docker stop <name>
+docker rm <name>
+docker rmi <image>
+docker save -o file.tar <image>
+docker load -i file.tar
+
+========================================================
+END OF WEEK - 5
+========================================================
+
+
+
+
+========================================================
+            WEEK – 6 : DOCKER COMPOSE LAB
+========================================================
+
+OBJECTIVE:
+To deploy a multi-container application using Docker Compose with
+Frontend, Backend, and MongoDB running together.
+
+========================================================
+1️⃣ FOLDER STRUCTURE
+========================================================
+
+project/
+ ├── backend/
+ │    ├── server.js
+ │    └── Dockerfile
+ ├── frontend/
+ │    ├── index.html
+ │    └── Dockerfile
+ └── docker-compose.yml
+
+========================================================
+2️⃣ BACKEND SERVICE
+========================================================
+
+server.js
+----------
+const express = require("express");
+const app = express();
+app.get("/", function (req, res) {
+    res.send("Backend working!");
+});
+app.listen(5000, function () {
+    console.log("Backend running at 5000");
+});
+
+backend/Dockerfile
+-------------------
+FROM node:18
+WORKDIR /usr/src/app
+COPY . .
+RUN npm install express
+CMD ["node", "server.js"]
+
+========================================================
+3️⃣ FRONTEND SERVICE
+========================================================
+
+index.html
+-----------
+<h1>Hello from Frontend</h1>
+
+frontend/Dockerfile
+--------------------
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+
+========================================================
+4️⃣ docker-compose.yml
+========================================================
+
+version: "3.8"
+
+services:
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    volumes:
+      - ./backend:/usr/src/app
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/usr/src/app
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
+
+========================================================
+5️⃣ DOCKER COMPOSE COMMANDS
+========================================================
+
+docker-compose up --build
+docker-compose up -d
+docker-compose ps
+docker-compose logs backend
+docker-compose down
+docker-compose down -v
+docker-compose up --build frontend
+docker volume ls
+
+========================================================
+END OF WEEK - 6
+========================================================
+
+
+
+========================================================
+                WEEK – 7 : MAVEN LAB
+========================================================
+
+OBJECTIVE:
+To build Java applications using Maven, use pom.xml for dependencies,
+write JUnit tests, create executable JAR (shade plugin), and WAR files.
+
+========================================================
+1️⃣ CREATE MAVEN PROJECT
+========================================================
+
+Command:
+mvn archetype:generate -DgroupId=com.example -DartifactId=myapp \
+-DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+Structure:
+myapp/
+ ├── src/main/java/com/example/App.java
+ ├── src/test/java/com/example/AppTest.java
+ └── pom.xml
+
+========================================================
+2️⃣ JAVA MAIN PROGRAM
+========================================================
+
+App.java
+---------
+package com.example;
+
+public class App {
+    public static int add(int a, int b){
+        return a + b;
+    }
+    public static void main(String[] args){
+        System.out.println("Hello from Maven!");
+    }
+}
+
+========================================================
+3️⃣ JUNIT TEST
+========================================================
+
+AppTest.java
+-------------
+package com.example;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class AppTest {
+    @Test
+    public void testAdd() {
+        assertEquals(10, App.add(5, 5));
+    }
+}
+
+========================================================
+4️⃣ pom.xml
+========================================================
+
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>myapp</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>
+
+========================================================
+5️⃣ MAVEN COMMANDS
+========================================================
+mvn clean install
+mvn test
+mvn clean
+mvn dependency:tree
+mvn -DskipTests install
+
+========================================================
+6️⃣ EXECUTABLE JAR (SHADE PLUGIN)
+========================================================
+
+Add this inside pom.xml:
+-------------------------
+<build>
+ <plugins>
+   <plugin>
+     <groupId>org.apache.maven.plugins</groupId>
+     <artifactId>maven-shade-plugin</artifactId>
+     <version>3.4.1</version>
+     <executions>
+       <execution>
+         <phase>package</phase>
+         <goals><goal>shade</goal></goals>
+         <configuration>
+           <transformers>
+             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+               <mainClass>com.example.App</mainClass>
+             </transformer>
+           </transformers>
+         </configuration>
+       </execution>
+     </executions>
+   </plugin>
+ </plugins>
+</build>
+
+Build:
+mvn clean package
+
+Run:
+java -jar target/myapp-1.0-SNAPSHOT-shaded.jar
+
+========================================================
+7️⃣ MAVEN WEB APPLICATION (WAR)
+========================================================
+
+Command:
+mvn archetype:generate -DgroupId=com.example -DartifactId=mywebapp \
+-DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+Add Servlet API:
+------------------
+<dependency>
+  <groupId>jakarta.servlet</groupId>
+  <artifactId>jakarta.servlet-api</artifactId>
+  <version>5.0.0</version>
+  <scope>provided</scope>
+</dependency>
+
+Build:
+mvn clean package
+
+WAR Output:
+target/mywebapp.war
+
+========================================================
+END OF WEEK - 7
+========================================================
+
+
+
+
+
 
